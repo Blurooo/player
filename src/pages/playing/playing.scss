@@ -15,6 +15,10 @@ page-playing {
       width: 2rem;
     }
 
+    .toolbar-title-ios, .toolbar-title-md{
+      color: #fff;
+    }
+
   }
   .content.content-ios, .content.content-md{
     background: inherit;
@@ -59,7 +63,7 @@ page-playing {
         max-width: 80%;
         text-align: center;
         display: block;
-        margin-top: 3px;
+        line-height: 20px;
       }
     }
 
@@ -138,11 +142,11 @@ page-playing {
         padding: 0px 30px;
 
         i{
-          font-size: 28px;
+          font-size: 26px;
         }
 
         .icon-play{
-          font-size: 50px;
+          font-size: 45px;
         }
       }
 
