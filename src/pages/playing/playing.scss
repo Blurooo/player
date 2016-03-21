@@ -1,13 +1,16 @@
 page-playing {
   background: #283056;
+
   .header.header-ios, .header.header-md{
-    .toolbar-background{
+    .toolbar-background {
       background: inherit;
       border: none;
     }
+
     button{
       color: #fff;
     }
+
     .revise{
       width: 2rem;
     }
@@ -17,6 +20,17 @@ page-playing {
     background: inherit;
     text-align: center;
     color: #fff;
+    .scroll-content{
+
+      .play-album{
+        height: 73%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+    }
+
     .album{
       height: 13rem;
       width: 13rem;
@@ -28,85 +42,161 @@ page-playing {
       background-size: 100% 100%;
       border: 2px solid #fff;
     }
-  }
-  .play-info{
-    height: 27%;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    background: #fff;
 
-    .process-static{
+    .lyric{
+      height: 100px;
       width: 100%;
-      height: 3px;
-      background: rgb(231, 236, 240);
-      position: relative;
-      top: 50px;
-
-      .process-dynamic{
-        position: relative;
-        padding: 0 6px;
-        width: 30%;
-        background: #9dcef4;
-        height: 3px;
-
-        &:after{
-          content: '';
-          width: 13px;
-          height: 13px;
-          background: #9dcef4;
-          display: inline-block;
-          border-radius: 50%;
-          position: absolute;
-          top: -4px;
-          right: 2px;
-        }
-
-        &:before{
-          content: '';
-          width: 19px;
-          height: 19px;
-          background: rgba(216, 239, 253, .8);
-          border: 1px solid #9dcef4;
-          display: inline-block;
-          border-radius: 50%;
-          position: absolute;
-          top: -8px;
-          right: -2px;
-        }
-      }
-
-      .cur-process{
-        position: absolute;
-        top: -24px;
-        left: 11px;
-        color: #9dcef4;
-      }
-      .all-process{
-        position: absolute;
-        top: -24px;
-        right: 11px;
-        color: #9dcef4;
-      }
-    }
-
-    .play-controller{
-      color: #9dcef4;
-      top: 70px;
-      position: relative;
+      overflow: hidden;
       display: flex;
-      justify-content: space-around;
+      flex-direction: column;
+      justify-content: flex-start;
       align-items: center;
-      height: 50px;
-      padding: 0px 30px;
 
-      .iconfont{
-        font-size: 28px;
-      }
-
-      .icon-play{
-        font-size: 50px;
+      p{
+        margin: 0;
+        font-family: '微软雅黑';
+        font-size: 12px;
+        max-width: 80%;
+        text-align: center;
+        display: block;
+        margin-top: 3px;
       }
     }
+
+    .play-info{
+      height: 27%;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      background: #fff;
+      color: #99CFFC;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      .process-static{
+        width: 100%;
+        height: 3px;
+        background: #E1F1FF;
+        position: relative;
+        top: 20px;
+
+        .process-dynamic{
+          position: relative;
+          padding: 0 6px;
+          width: 68%;
+          background: #99CFFC;
+          height: 3px;
+
+          &:after{
+            content: '';
+            width: 13px;
+            height: 13px;
+            background: #9dcef4;
+            display: inline-block;
+            border-radius: 50%;
+            position: absolute;
+            top: -5px;
+            right: 0px;
+          }
+
+          &:before{
+            content: '';
+            width: 19px;
+            height: 19px;
+            background: rgba(216, 239, 253, .8);
+            display: inline-block;
+            border-radius: 50%;
+            position: absolute;
+            top: -8px;
+            right: -3px;
+          }
+        }
+
+        .cur-process{
+          position: absolute;
+          top: -24px;
+          left: 11px;
+          color: #99CFFC;
+        }
+        .all-process{
+          position: absolute;
+          top: -24px;
+          right: 11px;
+          color: #99CFFC;
+        }
+      }
+
+      .play-controller{
+        color: #99CFFC;
+        top: 10px;
+        position: relative;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 50px;
+        padding: 0px 30px;
+
+        i{
+          font-size: 28px;
+        }
+
+        .icon-play{
+          font-size: 50px;
+        }
+      }
+
+      .voice{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .voice-slider-static{
+          width: 75%;
+          height: 3px;
+          background: #E1F1FF;
+          position: relative;
+
+          &:before{
+            content: '\e752';
+            font-family: iconfont;
+            position: absolute;
+            top: -5px;
+            left: -24px;
+          }
+
+          &:after{
+            content: '\e64e';
+            font-family: iconfont;
+            position: absolute;
+            top: -5px;
+            right: -24px;
+          }
+
+          .voice-slider-dynamic{
+            width: 33%;
+            height: 3px;
+            background: #99CFFC;
+            position: relative;
+
+            &:after{
+              content: '';
+              width: 13px;
+              height: 13px;
+              background: #9dcef4;
+              display: inline-block;
+              border-radius: 50%;
+              position: absolute;
+              top: -5px;
+              right: 0px;
+            }
+          }
+        }
+
+      }
+    }
+
   }
+
 }
