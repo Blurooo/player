@@ -1,0 +1,38 @@
+page-playing {
+  .header.header-ios, .header.header-md{
+    .toolbar-background{
+      background: #283056;
+      border: none;
+    }
+    button{
+      color: #fff;
+    }
+    .revise{
+      width: 2rem;
+    }
+
+  }
+  .content.content-ios, .content.content-md{
+    background: #283056;
+    text-align: center;
+    color: #fff;
+    .album{
+      height: 150px;
+      width: 150px;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      margin: 0 auto;
+      background: url("../../assets/imgs/album.jpg") no-repeat;
+      background-size: 100% 100%;
+      border: 2px solid #fff;
+    }
+  }
+  .play-controller{
+    height: 27%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: #fff;
+  }
+}
