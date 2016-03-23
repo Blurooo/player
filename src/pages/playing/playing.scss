@@ -58,13 +58,42 @@ page-playing {
 
       p{
         margin: 0;
-        font-family: '微软雅黑';
         font-size: 12px;
         max-width: 80%;
         text-align: center;
         display: block;
         line-height: 20px;
+        &:nth-child(1){
+          color: rgba(255, 255, 255, 0);
+        }
+        &:nth-child(2){
+          background-image: -webkit-gradient(linear, 0 0, 0 bottom,to(rgba(122, 138, 176, 1)), color-stop(0.5, rgba(82,98,136,1)), from(rgba(32, 48, 86, 1)));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        &:nth-child(3){
+          background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(122, 138, 176, 1)), color-stop(0.8, rgba(255,255,255,1)), to(rgba(255, 255, 255, 1)));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        &:nth-child(4){
+          color: rgba(255,255,255,0.95);
+        }
+        &:nth-child(5){
+          background-image: -webkit-gradient(linear, 0 0, 0 bottom, to(rgba(122, 138, 176, 1)), color-stop(0.3, rgba(255,255,255,1)), from(rgba(255, 255, 255, 1)));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        &:nth-child(6){
+          background-image: -webkit-gradient(linear, 0 0, 0 bottom,from(rgba(122, 138, 176, 1)), color-stop(0.5, rgba(82,98,136,1)), to(rgba(32, 48, 86, 1)));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        &:nth-child(7){
+
+        }
       }
+
     }
 
     .play-info{
@@ -77,6 +106,7 @@ page-playing {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      padding-bottom: 15px;
 
       .process-static{
         width: 100%;
@@ -84,6 +114,7 @@ page-playing {
         background: #E1F1FF;
         position: relative;
         top: 20px;
+        font-size: 12px;
 
         .process-dynamic{
           position: relative;
@@ -106,27 +137,27 @@ page-playing {
 
           &:before{
             content: '';
-            width: 19px;
-            height: 19px;
-            background: rgba(216, 239, 253, .8);
+            width: 21px;
+            height: 21px;
+            background: rgba(216, 239, 253, 0.8);
             display: inline-block;
             border-radius: 50%;
             position: absolute;
-            top: -8px;
-            right: -3px;
+            top: -9px;
+            right: -4px;
           }
         }
 
         .cur-process{
           position: absolute;
           top: -24px;
-          left: 11px;
+          left: 15px;
           color: #99CFFC;
         }
         .all-process{
           position: absolute;
           top: -24px;
-          right: 11px;
+          right: 15px;
           color: #99CFFC;
         }
       }
@@ -157,7 +188,7 @@ page-playing {
         align-items: center;
 
         .voice-slider-static{
-          width: 75%;
+          width: 70%;
           height: 3px;
           background: #E1F1FF;
           position: relative;
