@@ -21,7 +21,9 @@
 
       <p>- Hotel Saint George -</p>
     </div>
-    <div class="album"></div>
+    <div class="album">
+      <img src="../../assets/imgs/album.jpg" width="100%" height="100%" alt="">
+    </div>
 
     <div class="lyric">
       <p></p>
@@ -42,11 +44,11 @@
     </div>
 
     <div class="play-controller">
-      <i class="iconfont icon-like"></i>
-      <i class="iconfont icon-last"></i>
-      <i class="iconfont icon-play"></i>
-      <i class="iconfont icon-next"></i>
-      <i class="iconfont icon-loop-all"></i>
+      <i class="iconfont icon-like controller-btn"></i>
+      <i class="iconfont icon-last controller-btn"></i>
+      <i class="iconfont icon-play controller-btn" (click)="play()"></i>
+      <i class="iconfont icon-next controller-btn"></i>
+      <i class="iconfont icon-loop-all controller-btn"></i>
     </div>
 
     <div class="voice">

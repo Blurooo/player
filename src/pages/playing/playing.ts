@@ -19,4 +19,8 @@ export class PlayingPage {
     console.log('ionViewDidLoad PlayingPage');
   }
 
+  play(){
+
+  }
+
 }

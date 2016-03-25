@@ -42,9 +42,15 @@ page-playing {
       -moz-border-radius: 50%;
       border-radius: 50%;
       margin: 0 auto;
-      background: url("../../assets/imgs/album.jpg") no-repeat;
+      background: #283056;
       background-size: 100% 100%;
       border: 2px solid #fff;
+
+      img{
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+      }
     }
 
     .lyric{
@@ -179,6 +185,7 @@ page-playing {
         .icon-play{
           font-size: 45px;
         }
+
       }
 
       .voice{
