@@ -29,7 +29,7 @@ page-playing {
       border: 2px solid #fff;
     }
   }
-  .play-controller{
+  .play-info{
     height: 27%;
     width: 100%;
     position: absolute;
@@ -90,5 +90,23 @@ page-playing {
       }
     }
 
+    .play-controller{
+      color: #9dcef4;
+      top: 70px;
+      position: relative;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 50px;
+      padding: 0px 30px;
+
+      .iconfont{
+        font-size: 28px;
+      }
+
+      .icon-play{
+        font-size: 50px;
+      }
+    }
   }
 }
