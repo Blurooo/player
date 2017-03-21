@@ -1,7 +1,8 @@
 page-playing {
+  background: #283056;
   .header.header-ios, .header.header-md{
     .toolbar-background{
-      background: #283056;
+      background: inherit;
       border: none;
     }
     button{
@@ -13,12 +14,12 @@ page-playing {
 
   }
   .content.content-ios, .content.content-md{
-    background: #283056;
+    background: inherit;
     text-align: center;
     color: #fff;
     .album{
-      height: 150px;
-      width: 150px;
+      height: 13rem;
+      width: 13rem;
       -webkit-border-radius: 50%;
       -moz-border-radius: 50%;
       border-radius: 50%;
@@ -34,5 +35,60 @@ page-playing {
     position: absolute;
     bottom: 0;
     background: #fff;
+
+    .process-static{
+      width: 100%;
+      height: 3px;
+      background: rgb(231, 236, 240);
+      position: relative;
+      top: 50px;
+
+      .process-dynamic{
+        position: relative;
+        padding: 0 6px;
+        width: 30%;
+        background: #9dcef4;
+        height: 3px;
+
+        &:after{
+          content: '';
+          width: 13px;
+          height: 13px;
+          background: #9dcef4;
+          display: inline-block;
+          border-radius: 50%;
+          position: absolute;
+          top: -4px;
+          right: 2px;
+        }
+
+        &:before{
+          content: '';
+          width: 19px;
+          height: 19px;
+          background: rgba(216, 239, 253, .8);
+          border: 1px solid #9dcef4;
+          display: inline-block;
+          border-radius: 50%;
+          position: absolute;
+          top: -8px;
+          right: -2px;
+        }
+      }
+
+      .cur-process{
+        position: absolute;
+        top: -24px;
+        left: 11px;
+        color: #9dcef4;
+      }
+      .all-process{
+        position: absolute;
+        top: -24px;
+        right: 11px;
+        color: #9dcef4;
+      }
+    }
+
   }
 }
