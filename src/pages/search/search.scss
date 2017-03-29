@@ -1,5 +1,12 @@
 page-search {
   background: #fff;
+  .search-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+
   .header {
     height: 44px;
     width: 100%;
@@ -44,5 +51,14 @@ page-search {
     button.active{
       border-bottom: 2px solid color($colors, primary);
     }
+  }
+
+  ion-scroll{
+    flex: 1;
+  }
+
+  .list{
+    margin-bottom: 0;
+
   }
 }

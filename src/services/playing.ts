@@ -23,4 +23,8 @@ export class PlayingService{
       this.audio.play();
     })
   }
+
+  searchSongsByKey(key : string){
+    return this.playing.searchSongsByKey(key);
+  }
 }

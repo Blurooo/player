@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {PlayingPage} from "../playing/playing";
 import {Song} from "../../entity/song";
@@ -14,6 +14,9 @@ import {Song} from "../../entity/song";
   templateUrl: 'list.html'
 })
 export class ListPage {
+
+  @Input()
+  songs : Song[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 

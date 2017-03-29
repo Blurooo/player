@@ -9,8 +9,11 @@ import {NavController} from "ionic-angular";
 export class BackDirective{
   constructor(renderer : Renderer, el : ElementRef, navCtl : NavController){
     renderer.listen(el.nativeElement, 'click', () => {
-      console.log('go back');
-      navCtl.pop();
+      navCtl.pop({
+        animate : true,
+        animation : 'md-transition',
+        direction : 'back'
+      });
     })
   }
 }
