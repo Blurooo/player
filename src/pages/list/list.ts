@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {PlayingPage} from "../playing/playing";
+import {Song} from "../../entity/song";
 
 /*
   Generated class for the List page.
@@ -17,6 +19,18 @@ export class ListPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListPage');
+  }
+
+  go(){
+    this.navCtrl.push(PlayingPage);
+  }
+
+  search(){
+    console.log('搜索');
+  }
+
+  addToLove(song : Song){
+    console.log('添加');
   }
 
 }

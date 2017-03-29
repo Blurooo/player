@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import {PlayingPage} from "../pages/playing/playing";
+import {ListPage} from "../pages/list/list";
 
 
 

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {Playing} from "../../providers/playing";
+import {ListPage} from "../list/list";
+import {SearchPage} from "../search/search";
 
 /*
   Generated class for the Playing page.
@@ -13,14 +16,14 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class PlayingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public playing : Playing) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlayingPage');
   }
 
   play(){
-
+    this.navCtrl.push(SearchPage)
   }
 
 }

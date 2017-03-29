@@ -1,7 +1,5 @@
-page-list {
-
+page-search {
   background: #fff;
-
   .header {
     height: 44px;
     width: 100%;
@@ -47,20 +45,4 @@ page-list {
       border-bottom: 2px solid color($colors, primary);
     }
   }
-
-  .list{
-    margin-top: 0;
-  }
-  .list .item-block{
-    background: #f0f0f0;
-  }
-
-  .list .item-block .item-inner{
-    border-bottom: 1px solid #eee;
-  }
-  .list > .item-block:last-child, .list > .item-wrapper:last-child .item-block{
-    border-bottom: 1px solid #eee;
-  }
-
-
 }
