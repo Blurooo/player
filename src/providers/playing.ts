@@ -27,8 +27,8 @@ export class Playing {
   }
 
 
-  public searchSongsByKey(key : string) : Observable<Song[]>{
-    return this.http.post(`${this.apis.searchSongsByKey}?s=${key}&type=${this.type.song}`, null)
+  public searchSongsByKey(key : string, type ?: string, offset ?: number) : Observable<Song[]>{
+    return this.http.post(`${this.apis.searchSongsByKey}?s=${key}&type=${type || this.type.song}&limit=10&offset=${offset || 0}`, null)
       .map(this.extraData)
       .map((res : any) => res.result.songs);
   }

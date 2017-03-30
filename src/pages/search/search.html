@@ -10,15 +10,19 @@
 
   </div>
   <div class="search-segment">
-    <button ion-button color="primary" class="active" clear expandable (click)="addToLove(item)">歌曲</button>
-    <button ion-button color="primary" clear expandable (click)="addToLove(item)">专辑</button>
-    <button ion-button color="primary" clear expandable (click)="addToLove(item)">歌手</button>
-    <button ion-button color="primary" clear expandable (click)="addToLove(item)">歌单</button>
-    <button ion-button color="primary" clear expandable (click)="addToLove(item)">用户</button>
+    <button ion-button color="primary" [ngClass]="{active : curType === '1'}" clear expandable (click)="changeType('1')">歌曲</button>
+    <button ion-button color="primary" [ngClass]="{active : curType === '100'}" clear expandable (click)="changeType('100')">歌手</button>
+    <button ion-button color="primary" [ngClass]="{active : curType === '10'}" clear expandable (click)="changeType('10')">专辑</button>
+    <button ion-button color="primary" [ngClass]="{active : curType === '1000'}" clear expandable (click)="changeType('1000')">歌单</button>
+    <button ion-button color="primary" [ngClass]="{active : curType === '1002'}" clear expandable (click)="changeType('1002')">用户</button>
   </div>
-  <ion-scroll scrollY="true">
+  <ion-content class="reviese-content">
     <page-list [songs]="songs"></page-list>
-  </ion-scroll>
+    <ion-infinite-scroll threshold="5px" *ngIf="hasMore" (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+  <page-preview *ngIf="playingService.accessPlayingSong()" [song]="playingService.accessPlayingSong()"></page-preview>
 
 </div>
 

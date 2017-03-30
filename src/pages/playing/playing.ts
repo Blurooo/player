@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {Playing} from "../../providers/playing";
 import {ListPage} from "../list/list";
 import {SearchPage} from "../search/search";
+import {Util} from "../../common/util";
 
 /*
   Generated class for the Playing page.
@@ -16,14 +17,18 @@ import {SearchPage} from "../search/search";
 })
 export class PlayingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public playing : Playing) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public playing : Playing, public util : Util) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlayingPage');
   }
 
   play(){
-    this.navCtrl.push(SearchPage)
+    this.navCtrl.push(SearchPage, null, {
+      animate : true,
+      animation : 'md-transition',
+      direction : 'forward'
+    });
   }
 
 }

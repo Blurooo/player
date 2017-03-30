@@ -9,6 +9,8 @@ import {ListPage} from "../pages/list/list";
 import {BackDirective} from "../directives/back.directive";
 import {SearchPage} from "../pages/search/search";
 import {LovePage} from "../pages/love/love";
+import {Util} from "../common/util";
+import {PreviewPage} from "../pages/preview/preview";
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import {LovePage} from "../pages/love/love";
     ListPage,
     SearchPage,
     LovePage,
+    PreviewPage,
     BackDirective
   ],
   imports: [
@@ -28,13 +31,15 @@ import {LovePage} from "../pages/love/love";
     PlayingPage,
     ListPage,
     LovePage,
-    SearchPage
+    SearchPage,
+    PreviewPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Playing,
     Apis,
-    PlayingService
+    PlayingService,
+    Util
   ]
 })
 export class AppModule {}

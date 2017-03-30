@@ -7,13 +7,20 @@ page-search {
     width: 100%;
   }
 
+  .revise-empty{
+    height: 55px;
+  }
+
   .header {
     height: 44px;
     width: 100%;
     background: color($colors, primary);
     display: flex;
     border-bottom: 1px solid #eee;
-
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 
     .back{
       font-size: 24px;
@@ -37,6 +44,10 @@ page-search {
     height: 35px;
     background: #fff;
     display: flex;
+    position: fixed;
+    top: 44px;
+    left: 0;
+    right: 0;
 
     button{
       padding: 0;
@@ -60,5 +71,22 @@ page-search {
   .list{
     margin-bottom: 0;
 
+  }
+
+  .item h2{
+    color: #555;
+  }
+
+  .reviese-content{
+    margin-top: 79px;
+  }
+
+  .infinite-loading{
+    margin: 0;
+  }
+
+  ion-infinite-scroll-content{
+    background: #fcfcfc;
+    min-height: 40px;
   }
 }

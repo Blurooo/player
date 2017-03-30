@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import {PlayingPage} from "../pages/playing/playing";
-import {ListPage} from "../pages/list/list";
+import {PreviewPage} from "../pages/preview/preview";
+import {SearchPage} from "../pages/search/search";
 
 
 
@@ -10,7 +11,7 @@ import {ListPage} from "../pages/list/list";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = PlayingPage;
+  rootPage = SearchPage;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {

@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {PlayingPage} from "../playing/playing";
 import {Song} from "../../entity/song";
+import {PlayingService} from "../../services/playing";
 
 /*
   Generated class for the List page.
@@ -18,7 +19,7 @@ export class ListPage {
   @Input()
   songs : Song[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public playingService : PlayingService) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListPage');
@@ -34,6 +35,13 @@ export class ListPage {
 
   addToLove(song : Song){
     console.log('添加');
+  }
+
+
+  loadMore(infiniteScroll){
+    setTimeout(() => {
+      infiniteScroll.complete();
+    }, 2000);
   }
 
 }

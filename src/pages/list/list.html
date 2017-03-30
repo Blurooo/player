@@ -1,20 +1,20 @@
 
-<ion-list>
-  <ion-item-sliding *ngFor="let song of songs">
-    <ion-item>
-      <h2>{{song.name}}</h2>
-      <p>{{song.artists[0].name}} - {{song.album.name}}</p>
-      <button ion-button clear item-right>
-        <ion-icon name="md-more"></ion-icon>
-      </button>
-    </ion-item>
-    <ion-item-options side="right">
-      <button ion-button color="primary" expandable (click)="addToLove(song)">
-        <ion-icon name="ios-star-outline"></ion-icon>
-      </button>
-      <button ion-button color="dark" expandable (click)="addToLove(song)">
-        <ion-icon name="md-download"></ion-icon>
-      </button>
-    </ion-item-options>
-  </ion-item-sliding>
-</ion-list>
+  <ion-list>
+    <ion-item-sliding *ngFor="let song of songs">
+      <ion-item (click)="playingService.play(song.id)">
+        <h2>{{song.name}}</h2>
+        <p>{{song.artists[0].name}} - {{song.album.name}}</p>
+        <button ion-button clear item-right>
+          <ion-icon name="md-more"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="primary" expandable (click)="addToLove(song)">
+          <ion-icon name="ios-star-outline"></ion-icon>
+        </button>
+        <button ion-button color="dark" expandable (click)="addToLove(song)">
+          <ion-icon name="md-download"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
