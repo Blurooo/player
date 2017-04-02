@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {PlayingService} from "../../services/playing";
 
 /*
   Generated class for the Love page.
@@ -13,7 +14,7 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class LovePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public playingService : PlayingService) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LovePage');

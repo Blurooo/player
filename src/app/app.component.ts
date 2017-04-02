@@ -11,7 +11,7 @@ import {SearchPage} from "../pages/search/search";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = SearchPage;
+  rootPage = PlayingPage;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {

@@ -1,37 +1,59 @@
+@keyframes circle {
+  from{
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to{
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 page-playing {
   background: color($colors, primary);
 
-  .header.header-ios, .header.header-md{
-    .toolbar-background {
-      background: inherit;
-      border: none;
-    }
+  .playing-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
 
-    button{
-      color: #fff;
-    }
-
-    .revise{
-      width: 2rem;
-    }
-
-    .toolbar-title-ios, .toolbar-title-md{
-      color: #fff;
-    }
+  .header {
+    height: 50px;
+    width: 100%;
+    background: color($colors, primary);
+    display: flex;
+    font-size: 24px;
+    color: #fff;
+    padding: 11px 15px;
+    justify-content: space-between;
 
   }
-  .content.content-ios, .content.content-md{
+
+  .body{
     background: inherit;
     text-align: center;
     color: #fff;
-    .scroll-content{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 
-      .play-album{
-        height: 73%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+    .play-album{
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      .dash:before{
+        content: '-';
+        padding: 0 10px;
       }
     }
 
@@ -50,7 +72,14 @@ page-playing {
         -webkit-border-radius: 50%;
         -moz-border-radius: 50%;
         border-radius: 50%;
+
       }
+
+      .circle-animation{
+        animation: circle 15s linear infinite forwards;
+      }
+
+
     }
 
     .lyric{
@@ -103,10 +132,8 @@ page-playing {
     }
 
     .play-info{
-      height: 27%;
+      height: 155px;
       width: 100%;
-      position: absolute;
-      bottom: 0;
       background: #fff;
       color: #99CFFC;
       display: flex;
@@ -125,7 +152,7 @@ page-playing {
         .process-dynamic{
           position: relative;
           padding: 0 6px;
-          width: 68%;
+          width: 0%;
           background: #99CFFC;
           height: 3px;
 
@@ -182,7 +209,7 @@ page-playing {
           font-size: 26px;
         }
 
-        .icon-play{
+        .icon-play, .icon-pause{
           font-size: 45px;
         }
 
@@ -191,30 +218,18 @@ page-playing {
       .voice{
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
 
+        i{
+          padding: 0 15px;
+        }
         .voice-slider-static{
           width: 70%;
           height: 3px;
           background: #E1F1FF;
           position: relative;
 
-          &:before{
-            content: '\e752';
-            font-family: iconfont;
-            position: absolute;
-            top: -5px;
-            left: -24px;
-          }
-
-          &:after{
-            content: '\e64e';
-            font-family: iconfont;
-            position: absolute;
-            top: -5px;
-            right: -24px;
-          }
 
           .voice-slider-dynamic{
             width: 33%;

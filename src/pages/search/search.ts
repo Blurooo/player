@@ -18,14 +18,13 @@ export class SearchPage {
 
   songs : Song[];
   hasMore : boolean = true;
-  curType : string = '1';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public playingService : PlayingService) {}
 
   ionViewDidLoad() {
-    this.playingService.searchSongsByKey('晚晴').subscribe((songs : Song[]) => {
-      this.songs = songs;
-    })
+    // this.playingService.searchSongsByKey('晚晴').subscribe((songs : Song[]) => {
+    //   this.songs = songs;
+    // })
   }
 
   search(key : string){
@@ -44,7 +43,6 @@ export class SearchPage {
   }
 
   changeType(type : string){
-    this.curType = type;
     this.playingService.changeType(type).subscribe((songs : Song[]) => {
       this.songs = songs;
     });

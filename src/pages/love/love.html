@@ -1,18 +1,17 @@
-<!--
-  Generated template for the Love page.
+<div class="love-container">
+  <div class="header">
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+    <div class="back" goBack="">
+      <ion-icon name="md-arrow-back"></ion-icon>
+    </div>
 
-  <ion-navbar>
-    <ion-title>love</ion-title>
-  </ion-navbar>
+    <div class="title">我的播放列表</div>
 
-</ion-header>
+  </div>
+
+  <div class="body">
+    <page-list [playList]="playingService.getPlayList()"></page-list>
+  </div>
 
 
-<ion-content padding>
-
-</ion-content>
+</div>

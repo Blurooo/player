@@ -6,13 +6,13 @@
 -->
 <ion-list class="preview">
   <ion-item>
-    <ion-avatar item-left>
-      <img src="../../assets/imgs/album.jpg">
+    <ion-avatar item-left (click)="goPlaying()">
+      <img src="{{song.album.picUrl}}">
     </ion-avatar>
     <h2>{{song.name}}</h2>
     <p>{{song.artists[0].name}} - {{song.album.name}}</p>
-    <button (click)="pause()" ion-button clear item-right>
-      <i class="iconfont" [ngClass]="{'icon-play': true}"></i>
+    <button (click)="changePlayStatus()" ion-button clear item-right>
+      <i class="iconfont icon-{{playingService.isPlaying() ? 'pause' : 'play'}}"></i>
     </button>
     <button ion-button clear item-right>
       <ion-icon name="md-more"></ion-icon>

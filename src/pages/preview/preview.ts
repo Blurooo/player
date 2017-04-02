@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {Song} from "../../entity/song";
 import {PlayingService} from "../../services/playing";
+import {PlayingPage} from "../playing/playing";
 
 /*
   Generated class for the Preview page.
@@ -19,14 +20,22 @@ export class PreviewPage {
   @Input()
   song : Song;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public playService : PlayingService) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public playingService : PlayingService) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PreviewPage');
   }
 
-  pause(){
-    this.playService.pause();
+  changePlayStatus(){
+    this.playingService.changePlayStatus();
+  }
+
+  goPlaying(){
+    this.navCtrl.push(PlayingPage, null, {
+      animate : true,
+      animation : 'md-transition',
+      direction : 'forward'
+    })
   }
 
 }

@@ -11,6 +11,7 @@ import {SearchPage} from "../pages/search/search";
 import {LovePage} from "../pages/love/love";
 import {Util} from "../common/util";
 import {PreviewPage} from "../pages/preview/preview";
+import {ShowTimePipe} from "../pipes/show-time";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {PreviewPage} from "../pages/preview/preview";
     SearchPage,
     LovePage,
     PreviewPage,
-    BackDirective
+    BackDirective,
+    ShowTimePipe
   ],
   imports: [
     IonicModule.forRoot(MyApp)

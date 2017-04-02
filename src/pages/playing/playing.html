@@ -1,61 +1,56 @@
-<ion-header>
-  <ion-navbar>
-    <ion-buttons start>
-      <button ion-button icon-only>
-        <i class="iconfont icon-back"></i>
-      </button>
-    </ion-buttons>
-
-    <ion-buttons end>
-      <button ion-button icon-only class="revise">
-        <i class="iconfont icon-list"></i>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-<ion-content>
-
-  <div class="play-album">
-    <div>
-      <h3>You Can Trust In Me</h3>
-
-      <p>- Hotel Saint George -</p>
-    </div>
-    <div class="album">
-      <img src="../../assets/imgs/album.jpg" width="100%" height="100%" alt="">
-    </div>
-
-    <div class="lyric">
-      <p></p>
-      <p>我将春天付给了你</p>
-      <p>将冬天留给我自己</p>
-      <p>我将你的背景留给我自己</p>
-      <p>却将自己给了你</p>
-      <p>爱是没有人了解的东西</p>
-      <p>爱是永痕</p>
-    </div>
+<div class="playing-container">
+  <div class="header">
+    <ion-icon name="ios-search" (click)="goSearch()"></ion-icon>
+    <ion-icon name="md-list" (click)="goList()"></ion-icon>
   </div>
+  <div class="body">
 
-  <div class="play-info">
+    <div class="play-album">
+      <div>
+        <h3>{{playingService.getPlayingSong()?.name || 'now try to play a song'}}</h3>
 
-    <div class="process-static">
-      <span class="cur-process">2:43</span><span class="all-process">4:26</span>
-      <div class="process-dynamic"></div>
-    </div>
+        <p ><span class="dash"></span>{{playingService.getPlayingSong()?.artists[0]?.name || 'cmx'}}<span class="dash"></span></p>
+      </div>
+      <div class="album">
+        <img class="{{playingService.isPlaying() ? 'circle-animation' : ''}}" src="{{playingService.getPlayingSong()?.album?.picUrl || '../../assets/imgs/default.jpg'}}" width="100%" height="100%" alt="">
+      </div>
 
-    <div class="play-controller">
-      <i class="iconfont icon-like controller-btn"></i>
-      <i class="iconfont icon-last controller-btn"></i>
-      <i class="iconfont icon-play controller-btn" (click)="play()"></i>
-      <i class="iconfont icon-next controller-btn"></i>
-      <i class="iconfont icon-loop-all controller-btn"></i>
-    </div>
-
-    <div class="voice">
-      <div class="voice-slider-static">
-        <div class="voice-slider-dynamic"></div>
+      <div class="lyric">
+        <p></p>
+        <p>我将春天付给了你</p>
+        <p>将冬天留给我自己</p>
+        <p>我将你的背景留给我自己</p>
+        <p>却将自己给了你</p>
+        <p>爱是没有人了解的东西</p>
+        <p>爱是永痕</p>
       </div>
     </div>
 
+    <div class="play-info">
+
+      <div class="process-static" #process (click)="seek($event.offsetX / $event.target.offsetWidth, $event)">
+        <span class="cur-process">{{playingService.getPlayInfo()?.currentTime | showTime}}</span><span class="all-process">{{playingService.getPlayInfo()?.duration | showTime}}</span>
+        <div class="process-dynamic" [style.width]="playingService.getPlayInfo()?.process"></div>
+      </div>
+
+      <div class="play-controller">
+        <i class="iconfont icon-like controller-btn"></i>
+        <i class="iconfont icon-last controller-btn" (click)="playingService.last()"></i>
+        <i class="iconfont controller-btn icon-{{playingService.isPlaying() ? 'pause' : 'play'}}" (click)="playingService.changePlayStatus()"></i>
+        <i class="iconfont icon-next controller-btn" (click)="playingService.next(true)"></i>
+        <i class="iconfont icon-{{getPlayModeString()}} controller-btn" (click)="playingService.changePlayMode()"></i>
+      </div>
+
+      <div class="voice">
+        <i class="iconfont icon-mute" (click)="mute()"></i>
+        <div class="voice-slider-static" (click)="changeVolume($event.offsetX / $event.target.offsetWidth)">
+          <div class="voice-slider-dynamic" [style.width]="playingService.getVolume()"></div>
+        </div>
+        <i class="iconfont icon-loud" (click)="loud()"></i>
+      </div>
+
+    </div>
   </div>
-</ion-content>
+</div>
+
+

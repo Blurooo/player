@@ -50,6 +50,7 @@ page-list {
 
   .list{
     margin-top: 0;
+    margin-bottom: 0;
   }
   .list .item-block{
     background: #fcfcfc;
@@ -63,4 +64,16 @@ page-list {
   }
 
 
+  .duration{
+    font-size: 14px;
+  }
+
+  .index{
+    font-size: 1em;
+    width: 12px;
+  }
+
+  .index:not(.ion-ios-stats){
+    font-family: inherit;
+  }
 }

@@ -19,6 +19,9 @@ export class ListPage {
   @Input()
   songs : Song[];
 
+  @Input()
+  playList : Song[];
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public playingService : PlayingService) {}
 
   ionViewDidLoad() {
@@ -42,6 +45,19 @@ export class ListPage {
     setTimeout(() => {
       infiniteScroll.complete();
     }, 2000);
+  }
+
+  show(e){
+    e.stopPropagation();
+  }
+
+  play(song : Song){
+    this.navCtrl.pop({
+      animate : true,
+      animation : 'md-transition',
+      direction : 'forward'
+    });
+    this.playingService.play(song);
   }
 
 }
