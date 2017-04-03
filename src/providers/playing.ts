@@ -33,10 +33,14 @@ export class Playing {
       .map((res : any) => res.result.songs);
   }
 
-  public getDetailById(id : number) : Observable<Song>{
+  public getDetailById(id : number, crack ?: boolean) : Observable<Song>{
     return this.http.get(`${this.apis.getDetailById}?id=${id}&ids=[${id}]`)
       .map(this.extraData)
-      .map((res : any) => res.songs[0]);
+      .map((res : any) => {res.songs[0].mp3Url = this.getSongCrackById(id); return res.songs[0]});
+  }
+
+  public getSongCrackById(id : number){
+    return this.apis.crackSongsById.replace('%s', id + '');
   }
 
   extraData(res : Response){

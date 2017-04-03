@@ -34,6 +34,7 @@ page-search {
       background: none;
       color: #fff;
       margin-top: 1px;
+      font-size: 1.5rem;
 
       &::-webkit-input-placeholder{
         color: #fff;
@@ -58,6 +59,10 @@ page-search {
       -webkit-border-radius: 0;
       -moz-border-radius: 0;
       border-radius: 0;
+    }
+
+    .button-inner{
+      font-size: 1.5rem;
     }
 
     button.active{

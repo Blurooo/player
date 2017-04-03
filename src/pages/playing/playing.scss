@@ -55,6 +55,10 @@ page-playing {
         content: '-';
         padding: 0 10px;
       }
+
+      h3{
+        font-size: 1.8rem;
+      }
     }
 
     .album{
@@ -155,8 +159,42 @@ page-playing {
           width: 0%;
           background: #99CFFC;
           height: 3px;
+          //
+          //&:after{
+          //  content: '';
+          //  width: 13px;
+          //  height: 13px;
+          //  background: #9dcef4;
+          //  display: inline-block;
+          //  border-radius: 50%;
+          //  position: absolute;
+          //  top: -5px;
+          //  right: 0px;
+          //}
+          //
+          //&:before{
+          //  content: '';
+          //  width: 21px;
+          //  height: 21px;
+          //  background: rgba(216, 239, 253, 0.8);
+          //  display: inline-block;
+          //  border-radius: 50%;
+          //  position: absolute;
+          //  top: -9px;
+          //  right: -4px;
+          //}
+        }
 
-          &:after{
+        .process-pointer{
+          width: 21px;
+          height: 21px;
+          background: rgba(216, 239, 253, 0.8);
+          position: absolute;
+          right: -4px;
+          top: -9px;
+          border-radius: 50%;
+
+          &:before{
             content: '';
             width: 13px;
             height: 13px;
@@ -164,23 +202,10 @@ page-playing {
             display: inline-block;
             border-radius: 50%;
             position: absolute;
-            top: -5px;
-            right: 0px;
-          }
-
-          &:before{
-            content: '';
-            width: 21px;
-            height: 21px;
-            background: rgba(216, 239, 253, 0.8);
-            display: inline-block;
-            border-radius: 50%;
-            position: absolute;
-            top: -9px;
-            right: -4px;
+            top: 4px;
+            right: 4px;
           }
         }
-
         .cur-process{
           position: absolute;
           top: -24px;
@@ -237,17 +262,39 @@ page-playing {
             background: #99CFFC;
             position: relative;
 
-            &:after{
-              content: '';
+            .voice-pointer {
               width: 13px;
               height: 13px;
               background: #9dcef4;
-              display: inline-block;
-              border-radius: 50%;
               position: absolute;
+              right: -4px;
               top: -5px;
-              right: 0px;
+              border-radius: 50%;
             }
+
+            //  &:before{
+            //    content: '';
+            //    width: 13px;
+            //    height: 13px;
+            //    background: #9dcef4;
+            //    display: inline-block;
+            //    border-radius: 50%;
+            //    position: absolute;
+            //    top: 4px;
+            //    right: 4px;
+            //  }
+            //}
+            //&:after{
+            //  content: '';
+            //  width: 13px;
+            //  height: 13px;
+            //  background: #9dcef4;
+            //  display: inline-block;
+            //  border-radius: 50%;
+            //  position: absolute;
+            //  top: -5px;
+            //  right: 0px;
+            //}
           }
         }
 

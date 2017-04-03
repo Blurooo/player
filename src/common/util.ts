@@ -45,4 +45,26 @@ export class Util {
       alert.present();
     });
   }
+
+  confirm(content : string, title ?: string) : Observable<any>{
+    return Observable.create((observer : Observer<any>) => {
+      let confirm = this.alertCtrl.create({
+        title: title || '确认操作',
+        subTitle: content || '请确认您的操作',
+        buttons: [{
+          text: '取消',
+          handler: () => {
+            observer.next(false);
+          }
+        },{
+          text : '确认',
+          handler : () => {
+            observer.next(true);
+          }
+        }],
+        mode: 'ios'
+      });
+      confirm.present();
+    })
+  }
 }

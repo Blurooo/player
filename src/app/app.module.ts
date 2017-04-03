@@ -12,6 +12,8 @@ import {LovePage} from "../pages/love/love";
 import {Util} from "../common/util";
 import {PreviewPage} from "../pages/preview/preview";
 import {ShowTimePipe} from "../pipes/show-time";
+import {DragItDirective} from "../directives/drag-it.directive";
+import {SettingPage} from "../pages/setting/setting";
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {ShowTimePipe} from "../pipes/show-time";
     SearchPage,
     LovePage,
     PreviewPage,
+    SettingPage,
     BackDirective,
+    DragItDirective,
     ShowTimePipe
   ],
   imports: [
@@ -34,6 +38,7 @@ import {ShowTimePipe} from "../pipes/show-time";
     ListPage,
     LovePage,
     SearchPage,
+    SettingPage,
     PreviewPage
   ],
   providers: [

@@ -1,17 +1,16 @@
-<div class="love-container">
+<div class="setting-container">
+
   <div class="header">
 
     <div class="back" goBack="">
       <ion-icon name="md-arrow-back"></ion-icon>
     </div>
 
-    <div class="title">我的播放列表</div>
+    <div class="title">设置</div>
 
   </div>
-
   <ion-content class="reviese-content">
-    <page-list [playList]="playingService.getPlayList()"></page-list>
+    <page-list [setting]="this.playingService.getSetting()"></page-list>
   </ion-content>
-
 
 </div>

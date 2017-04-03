@@ -51,6 +51,19 @@ page-list {
   .list{
     margin-top: 0;
     margin-bottom: 0;
+
+    .item{
+      h2{
+        font-size: 1.5rem;
+      }
+      p{
+        font-size: 1.2rem;
+      }
+    }
+
+    ion-label{
+      font-size: 1.6rem;
+    }
   }
   .list .item-block{
     background: #fcfcfc;

@@ -1,10 +1,11 @@
-page-love {
-
-  .love-container{
-    height: 100%;
-    width: 100%;
+page-setting {
+  background: #fff;
+  .setting-container{
     display: flex;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
+
 
     .header {
       height: 44px;
@@ -20,7 +21,7 @@ page-love {
       .title{
         font-size: 17px;
         padding-left: 0px;
-        line-height: 44px;
+        line-height: 43px;
         flex: 1;
         color: #fff;
       }
@@ -31,7 +32,8 @@ page-love {
         padding: 7px 15px;
       }
     }
-    .reviese-content{
+
+    ion-content{
       margin-top: 43px;
     }
   }

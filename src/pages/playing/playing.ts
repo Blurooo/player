@@ -6,6 +6,7 @@ import {PlayingService} from "../../services/playing";
 import {ListPage} from "../list/list";
 import {LovePage} from "../love/love";
 import {PlayMode} from "../../entity/play-mode";
+import {SettingPage} from "../setting/setting";
 
 /*
   Generated class for the Playing page.
@@ -18,6 +19,14 @@ import {PlayMode} from "../../entity/play-mode";
   templateUrl: 'playing.html'
 })
 export class PlayingPage {
+
+  volumeTmp : number = 0;
+
+  pushOption : any = {
+    animate : true,
+    animation : 'md-transition',
+    direction : 'forward'
+  }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public playingService : PlayingService, public util : Util) {}
 
@@ -42,19 +51,15 @@ export class PlayingPage {
   }
 
   goSearch(){
-    this.navCtrl.push(SearchPage, null, {
-      animate : true,
-      animation : 'md-transition',
-      direction : 'forward'
-    })
+    this.navCtrl.push(SearchPage, null, this.pushOption);
   }
 
   goList(){
-    this.navCtrl.push(LovePage, null, {
-      animate : true,
-      animation : 'md-transition',
-      direction : 'forward'
-    })
+    this.navCtrl.push(LovePage, null, this.pushOption);
+  }
+
+  goSetting(){
+    this.navCtrl.push(SettingPage, null, this.pushOption);
   }
 
   getPlayModeString(){
@@ -66,8 +71,19 @@ export class PlayingPage {
     this.playingService.changeVolume(volume);
   }
 
-  seek(percent, e){
-    console.log(e);
-    this.playingService.seek(percent);
+  seek(percent, mute){
+    percent && this.playingService.seek(percent);
+  }
+
+  seekStart(){
+    this.playingService.pause(true);
+  }
+
+  seekEnd(){
+    this.playingService.resume();
+  }
+
+  drag(e, name){
+    console.log(e, name);
   }
 }

@@ -5,6 +5,7 @@ import {Observable, Observer} from "rxjs";
 import {PlayInfo} from "../entity/play-info";
 import {Util} from "../common/util";
 import {PlayMode} from "../entity/play-mode";
+import {Setting} from "../entity/setting";
 /**
  * Created by zo on 2016/3/25.
  */
@@ -26,9 +27,18 @@ export class PlayingService {
   private playList = new Object();
   private playListArray : Song[] = [];
 
+  private setting : Setting = new Setting();
+
 
 
   constructor(public playing : Playing, public util : Util){
+    //初始化历史播放列表
+    let playList : any = JSON.parse(localStorage.getItem('playList'));
+    if(playList){
+      this.setPlayList(playList);
+    }
+    //初始化配置信息
+    this.initSetting();
     //初始化历史当前播放
     let play = JSON.parse(localStorage.getItem('playStatus'));
     if(play){
@@ -37,11 +47,34 @@ export class PlayingService {
       this.playMode = play.playMode;
       this.song && this.playInfo && this.playSong(this.song, this.playInfo);
     }
-    //初始化历史播放列表
-    let playList : any = JSON.parse(localStorage.getItem('playList'));
-    if(playList){
-      this.setPlayList(playList);
+
+  }
+
+  private initSetting(){
+    let setting : Setting = JSON.parse(localStorage.getItem('setting'));
+    if(setting){
+      this.setting = setting;
     }
+  }
+
+  public setAutoCrack(value ?: boolean){
+    value && (this.setting.autoCrack = true);
+    !value && (this.setting.autoCrack = false);
+    this.persistenSetting();
+  }
+
+  public setAutoResume(value ?: boolean){
+    value && (this.setting.autoResume = true);
+    !value && (this.setting.autoResume = false);
+    this.persistenSetting();
+  }
+
+  private persistenSetting(){
+    localStorage.setItem('setting', JSON.stringify(this.setting));
+  }
+
+  public getSetting(){
+    return this.setting;
   }
 
   //获得播放列表，实质上返回的是用以遍历的Array类型
@@ -66,6 +99,9 @@ export class PlayingService {
   }
 
   public seek(percent : number){
+    //消除不合理数据，起到错误防护作用
+    percent > 1 && (percent = 1);
+    percent < 0 && (percent = 0);
     this.audio.currentTime = this.audio.duration * percent;
   }
 
@@ -121,17 +157,31 @@ export class PlayingService {
         this.audio.pause();
         resume = true;
       }
-      this.playInfo.song = song;
-      this.playing.getDetailById(song.id).subscribe(song => {
-        if(song.fee && song.fee > 0){
-          this.util.alert(`该歌曲需要付费${song.fee}元，暂时无法播放`).subscribe(res => {
-            resume && this.resume(volume);
-          });
-          return;
-        }
-        this.playSong(song);
-        this.audio.oncanplay = () => {
-          this.fadeIn(volume, 10).subscribe();
+      this.playing.getDetailById(song.id, this.setting.autoCrack).subscribe(song => {
+        this.playInfo.song = song;
+        if(song.fee > 0){
+          if(!this.setting.autoCrack){
+            this.util.confirm(`该歌曲需要付费${song.fee}元，是否启动自动破解？`).subscribe(res => {
+              !res && resume && this.resume(volume);
+              if(res){
+                this.setAutoCrack(true);
+                this.playSong(song);
+                this.audio.oncanplay = () => {
+                  this.fadeIn(volume, 10).subscribe();
+                }
+              }
+            });
+          }else{
+            this.playSong(song);
+            this.audio.oncanplay = () => {
+              this.fadeIn(volume, 10).subscribe();
+            }
+          }
+        }else{
+          this.playSong(song);
+          this.audio.oncanplay = () => {
+            this.fadeIn(volume, 10).subscribe();
+          }
         }
       })
     });
@@ -193,7 +243,7 @@ export class PlayingService {
           clearInterval(min);
           observer.next(lastVolume);
         }
-      }, per || 3);
+      }, per || 5);
     });
   }
 
@@ -207,12 +257,13 @@ export class PlayingService {
             clearInterval(max);
             observer.next(lastVolume);
           }
-        }, per || 3);
+        }, per || 5);
     });
   }
 
   //实际播放音乐的逻辑，带playInfo时表明为恢复播放现场，默认只恢复不自动播放，除非autoPlay为true时
-  public playSong(song : Song, playInfo ?: PlayInfo, autoPlay ?: boolean){
+  public playSong(song : Song, playInfo ?: PlayInfo){
+    if(this.setting.autoCrack === undefined) this.initSetting();
     this.song = song;
     this.audio.src = song.mp3Url;
     this.audio.ontimeupdate = () => {
@@ -230,7 +281,7 @@ export class PlayingService {
     if(playInfo){
       this.audio.volume = this.playInfo.volume;
       this.audio.currentTime = this.playInfo.currentTime;
-      if(autoPlay){
+      if(this.setting.autoResume){
         this.audio.play();
       }
     }else{
@@ -239,8 +290,12 @@ export class PlayingService {
     }
   }
 
-  //暂停播放
-  public pause(){
+  //暂停播放，正常情况下暂停时使用淡出，但可以强制直接暂停
+  public pause(force ?: boolean){
+    if(force){
+      this.audio.pause();
+      return;
+    }
     this.fadeOut().subscribe((volume : number) => {
       this.audio.pause();
       this.audio.volume = volume;
@@ -305,6 +360,9 @@ export class PlayingService {
 
   //更改当前播放音量，取值0-1
   public changeVolume(volume : number){
+    //消除不合理数据，起到错误防护作用
+    volume > 1 && (volume = 1);
+    volume < 0 && (volume = 0);
     this.audio.volume = volume;
     this.playInfo.volume = volume;
     this.playInfo.volumePercent = volume * 100 + '%';

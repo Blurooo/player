@@ -28,12 +28,21 @@
         <span item-right class="duration note-ios">{{song.duration | showTime:'ms'}}</span>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="primary" expandable (click)="addToLove(song)">
-          <ion-icon name="ios-star-outline"></ion-icon>
-        </button>
-        <button ion-button color="dark" expandable (click)="addToLove(song)">
-          <ion-icon name="md-download"></ion-icon>
+        <button ion-button color="dark" expandable (click)="remove(index)">
+          <ion-icon name="md-trash"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>
+  </ion-list>
+
+
+  <ion-list *ngIf="setting">
+    <ion-item>
+      <ion-label>启动自动恢复播放</ion-label>
+      <ion-toggle [checked]="playingService.getSetting()?.autoResume" (ionChange)="playingService.setAutoResume($event._checked)"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>自动破解收费歌曲</ion-label>
+      <ion-toggle [checked]="playingService.getSetting()?.autoCrack" (ionChange)="playingService.setAutoCrack($event._checked)"></ion-toggle>
+    </ion-item>
   </ion-list>

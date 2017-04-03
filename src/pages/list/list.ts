@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {PlayingPage} from "../playing/playing";
 import {Song} from "../../entity/song";
 import {PlayingService} from "../../services/playing";
+import {Setting} from "../../entity/setting";
 
 /*
   Generated class for the List page.
@@ -21,6 +22,9 @@ export class ListPage {
 
   @Input()
   playList : Song[];
+
+  @Input()
+  setting : Setting;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public playingService : PlayingService) {}
 
@@ -60,4 +64,12 @@ export class ListPage {
     this.playingService.play(song);
   }
 
+  change(e){
+    console.log('改变', e);
+  }
+
+  remove(index : number){
+    console.log('remove', index);
+    this.playingService.delSong(index);
+  }
 }

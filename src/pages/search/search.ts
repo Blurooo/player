@@ -42,7 +42,9 @@ export class SearchPage {
     });
   }
 
+  //暂时封闭除搜索歌曲外的功能
   changeType(type : string){
+    if(type != '1') return;
     this.playingService.changeType(type).subscribe((songs : Song[]) => {
       this.songs = songs;
     });

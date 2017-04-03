@@ -1,7 +1,7 @@
 <div class="playing-container">
   <div class="header">
     <ion-icon name="ios-search" (click)="goSearch()"></ion-icon>
-    <ion-icon name="md-list" (click)="goList()"></ion-icon>
+    <ion-icon name="md-settings" (click)="goSetting()"></ion-icon>
   </div>
   <div class="body">
 
@@ -28,23 +28,27 @@
 
     <div class="play-info">
 
-      <div class="process-static" #process (click)="seek($event.offsetX / $event.target.offsetWidth, $event)">
+      <div class="process-static" (click)="seek($event.offsetX / $event.path[1].clientWidth)">
         <span class="cur-process">{{playingService.getPlayInfo()?.currentTime | showTime}}</span><span class="all-process">{{playingService.getPlayInfo()?.duration | showTime}}</span>
-        <div class="process-dynamic" [style.width]="playingService.getPlayInfo()?.process"></div>
+        <div class="process-dynamic" [style.width]="playingService.getPlayInfo()?.process">
+          <div class="process-pointer" dragIt (dragItStart)="seekStart()" (dragItEnd)="seekEnd()" (dragItMove)="seek($event)"></div>
+        </div>
       </div>
 
       <div class="play-controller">
-        <i class="iconfont icon-like controller-btn"></i>
+        <i class="iconfont icon-{{getPlayModeString()}} controller-btn" (click)="playingService.changePlayMode()"></i>
         <i class="iconfont icon-last controller-btn" (click)="playingService.last()"></i>
         <i class="iconfont controller-btn icon-{{playingService.isPlaying() ? 'pause' : 'play'}}" (click)="playingService.changePlayStatus()"></i>
         <i class="iconfont icon-next controller-btn" (click)="playingService.next(true)"></i>
-        <i class="iconfont icon-{{getPlayModeString()}} controller-btn" (click)="playingService.changePlayMode()"></i>
+        <i class="ion-icon icon-list" (click)="goList()"></i>
       </div>
 
       <div class="voice">
         <i class="iconfont icon-mute" (click)="mute()"></i>
         <div class="voice-slider-static" (click)="changeVolume($event.offsetX / $event.target.offsetWidth)">
-          <div class="voice-slider-dynamic" [style.width]="playingService.getVolume()"></div>
+          <div class="voice-slider-dynamic" [style.width]="playingService.getVolume()">
+            <div class="voice-pointer" dragIt="true" (dragItMove)="changeVolume($event)"></div>
+          </div>
         </div>
         <i class="iconfont icon-loud" (click)="loud()"></i>
       </div>
