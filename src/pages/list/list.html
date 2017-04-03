@@ -1,25 +1,20 @@
 
   <ion-list *ngIf="songs">
-    <ion-item-sliding *ngFor="let song of songs">
+    <ion-item-sliding #slide *ngFor="let song of songs">
       <ion-item (click)="play(song)">
         <h2>{{song.name}}</h2>
         <p>{{song.artists[0].name}} - {{song.album.name}}</p>
-        <button (click)="show($event)" ion-button clear item-right>
-          <ion-icon name="md-more"></ion-icon>
-        </button>
+        <span item-right class="duration note-ios">{{song.duration | showTime:'ms'}}</span>
       </ion-item>
-      <ion-item-options side="right">
-        <button ion-button color="primary" expandable (click)="addToLove(song)">
+      <ion-item-options side="right" (ionSwipe)="addToLove(song, slide)">
+        <button ion-button color="dark" expandable (click)="addToLove(song, slide)">
           <ion-icon name="ios-star-outline"></ion-icon>
-        </button>
-        <button ion-button color="dark" expandable (click)="addToLove(song)">
-          <ion-icon name="md-download"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
 
-  <ion-list *ngIf="playList">
+  <ion-list *ngIf="playList" class="love-list">
     <ion-item-sliding *ngFor="let song of playList; let index = index">
       <ion-item (click)="play(song)">
         <span item-left class="note-ios"><ion-icon class="index" name="{{playingService.isPlaying() && playingService.getPlayingSong().id === song.id ? 'ios-stats' : ''}}">{{playingService.isPlaying() && playingService.getPlayingSong().id === song.id ? '' : index + 1}}</ion-icon></span>
@@ -27,7 +22,7 @@
         <p>{{song.artists[0].name}} - {{song.album.name}}</p>
         <span item-right class="duration note-ios">{{song.duration | showTime:'ms'}}</span>
       </ion-item>
-      <ion-item-options side="right">
+      <ion-item-options side="right" (ionSwipe)="remove(index)">
         <button ion-button color="dark" expandable (click)="remove(index)">
           <ion-icon name="md-trash"></ion-icon>
         </button>

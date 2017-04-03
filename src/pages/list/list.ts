@@ -4,6 +4,7 @@ import {PlayingPage} from "../playing/playing";
 import {Song} from "../../entity/song";
 import {PlayingService} from "../../services/playing";
 import {Setting} from "../../entity/setting";
+import {Util} from "../../common/util";
 
 /*
   Generated class for the List page.
@@ -26,7 +27,7 @@ export class ListPage {
   @Input()
   setting : Setting;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public playingService : PlayingService) {}
+  constructor(public navCtrl: NavController, public util : Util, public playingService : PlayingService) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListPage');
@@ -40,8 +41,10 @@ export class ListPage {
     console.log('搜索');
   }
 
-  addToLove(song : Song){
-    console.log('添加');
+  addToLove(song : Song, slide){
+    this.playingService.addSongToPlayList(song);
+    slide.close();
+    this.util.toast('已添加到播放列表');
   }
 
 

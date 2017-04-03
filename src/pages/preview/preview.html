@@ -14,8 +14,8 @@
     <button (click)="changePlayStatus()" ion-button clear item-right>
       <i class="iconfont icon-{{playingService.isPlaying() ? 'pause' : 'play'}}"></i>
     </button>
-    <button ion-button clear item-right>
-      <ion-icon name="md-more"></ion-icon>
+    <button (click)="playingService.next(true)" ion-button clear item-right>
+      <i class="iconfont icon-next"></i>
     </button>
   </ion-item>
 </ion-list>

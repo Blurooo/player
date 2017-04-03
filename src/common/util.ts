@@ -1,5 +1,5 @@
 import {Component, Injectable} from '@angular/core';
-import {AlertController} from "ionic-angular";
+import {AlertController, ToastController} from "ionic-angular";
 import {Observable, Observer} from "rxjs";
 
 /*
@@ -11,7 +11,7 @@ import {Observable, Observer} from "rxjs";
 @Injectable()
 export class Util {
 
-  constructor(public alertCtrl : AlertController) {
+  constructor(public alertCtrl : AlertController, public toastCtrl : ToastController) {
   }
 
 
@@ -66,5 +66,14 @@ export class Util {
       });
       confirm.present();
     })
+  }
+
+  toast(message : string, duration ?: number){
+    let toast = this.toastCtrl.create({
+      message : message,
+      duration : duration || 2000,
+      position : 'top'
+    });
+    toast.present();
   }
 }

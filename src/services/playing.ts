@@ -6,8 +6,13 @@ import {PlayInfo} from "../entity/play-info";
 import {Util} from "../common/util";
 import {PlayMode} from "../entity/play-mode";
 import {Setting} from "../entity/setting";
+
 /**
- * Created by zo on 2016/3/25.
+ *
+ * 整个播放器的核心服务
+ *
+ * 提供了音乐播放相关的所有api以及数据维护持久化
+ *
  */
 
 @Injectable()
@@ -27,18 +32,21 @@ export class PlayingService {
   private playList = new Object();
   private playListArray : Song[] = [];
 
+  //维护配置信息
   private setting : Setting = new Setting();
 
 
-
   constructor(public playing : Playing, public util : Util){
+
     //初始化历史播放列表
     let playList : any = JSON.parse(localStorage.getItem('playList'));
     if(playList){
       this.setPlayList(playList);
     }
+
     //初始化配置信息
     this.initSetting();
+
     //初始化历史当前播放
     let play = JSON.parse(localStorage.getItem('playStatus'));
     if(play){
@@ -47,6 +55,9 @@ export class PlayingService {
       this.playMode = play.playMode;
       this.song && this.playInfo && this.playSong(this.song, this.playInfo);
     }
+    //
+    // //初始化历史key
+    // this.key = localStorage.getItem('key');
 
   }
 
@@ -71,6 +82,14 @@ export class PlayingService {
 
   private persistenSetting(){
     localStorage.setItem('setting', JSON.stringify(this.setting));
+  }
+
+  private persistenKey(){
+    localStorage.setItem('key', this.key);
+  }
+
+  public getLastKey(){
+    return this.key;
   }
 
   public getSetting(){
@@ -373,4 +392,5 @@ export class PlayingService {
   public getCurType(){
     return this.curType;
   }
+
 }

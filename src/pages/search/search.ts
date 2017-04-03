@@ -17,14 +17,17 @@ export class SearchPage {
 
 
   songs : Song[];
+  autofocus : boolean = false;
   hasMore : boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public playingService : PlayingService) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public playingService : PlayingService) {
+    if(playingService.getLastKey()){
+      this.search(playingService.getLastKey());
+    }
+  }
 
   ionViewDidLoad() {
-    // this.playingService.searchSongsByKey('晚晴').subscribe((songs : Song[]) => {
-    //   this.songs = songs;
-    // })
+    this.autofocus = true;
   }
 
   search(key : string){
