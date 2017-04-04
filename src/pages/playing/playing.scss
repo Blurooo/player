@@ -86,14 +86,44 @@ page-playing {
 
     }
 
+    .lyric-scroll{
+      height: 100px;
+      text-align: center;
+      background: none;
+      padding: 0 10%;
+
+      .scroll-content{
+        overflow-y: hidden;
+      }
+
+      p{
+        margin: 0;
+        line-height: 20px;
+        font-size: 1.4rem;
+        color: #aaa;
+      }
+
+      p.cur{
+        font-size: 1.43rem;
+        color: #fff;
+        transition: color 0.3s;
+      }
+    }
+
     .lyric{
       height: 100px;
       width: 100%;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: hidden;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
+
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
 
       p{
         margin: 0;

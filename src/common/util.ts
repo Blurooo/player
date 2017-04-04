@@ -2,12 +2,7 @@ import {Component, Injectable} from '@angular/core';
 import {AlertController, ToastController} from "ionic-angular";
 import {Observable, Observer} from "rxjs";
 
-/*
-  Generated class for the Util provider.
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class Util {
 
@@ -26,6 +21,12 @@ export class Util {
     s < 10 && (ret += '0');
     ret += s;
     return ret;
+  }
+
+  //将歌词格式的时间字符串转化为ms
+  translateLrcTime(time : string){
+    let numberTime = time.trim().split(':');
+    return +numberTime[0] * 60 * 1000 + +numberTime[1] * 1000;
   }
 
 

@@ -11,4 +11,5 @@ export class Song{
   duration : number
   fee : number
   mp3Url : string
+  lrc : string[]
 }

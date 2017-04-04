@@ -35,6 +35,14 @@ export class PlayingService {
   //维护配置信息
   private setting : Setting = new Setting();
 
+  //内部维护歌词分时数组
+  private lrcTimes : number[] = [];
+
+  //切换下一句歌词事件监听器
+  private lrcUptateListener : any;
+
+  private curLrcIndex : number = 0;
+
 
   constructor(public playing : Playing, public util : Util){
 
@@ -55,9 +63,6 @@ export class PlayingService {
       this.playMode = play.playMode;
       this.song && this.playInfo && this.playSong(this.song, this.playInfo);
     }
-    //
-    // //初始化历史key
-    // this.key = localStorage.getItem('key');
 
   }
 
@@ -285,21 +290,27 @@ export class PlayingService {
     if(this.setting.autoCrack === undefined) this.initSetting();
     this.song = song;
     this.audio.src = song.mp3Url;
+    this.curLrcIndex = 0;
     this.audio.ontimeupdate = () => {
       this.playInfo.currentTime = this.audio.currentTime;
       this.playInfo.duration = this.audio.duration;
       this.playInfo.volume = this.audio.volume;
       this.playInfo.process = (this.audio.currentTime / this.audio.duration) * 100 + '%';
+      this.checkoutLrc();
       this.persistentPlayStatus();
     }
     this.audio.oncanplay = () => {
+      //有必要的话清空上一个歌词分时
+      //
     }
     this.audio.onended = () => {
       this.next();
+      this.lrcTimes = [];
     }
     if(playInfo){
       this.audio.volume = this.playInfo.volume;
       this.audio.currentTime = this.playInfo.currentTime;
+      this.checkoutLrc();
       if(this.setting.autoResume){
         this.audio.play();
       }
@@ -307,6 +318,14 @@ export class PlayingService {
       this.audio.play();
       this.addSongToPlayList(song);
     }
+    //获取歌词
+    this.playing.getLrcById(song.id).subscribe(lrc => {
+      if(!lrc) return;
+      this.song.lrc = lrc.split('[').filter(l => {
+        return /^\d+/.test(l) && l.split(']')[1].trim();
+      });
+      this.resolveLrc();
+    })
   }
 
   //暂停播放，正常情况下暂停时使用淡出，但可以强制直接暂停
@@ -393,4 +412,31 @@ export class PlayingService {
     return this.curType;
   }
 
+  //将'02:34.980]为你我受冷风吹'形式的数组切分出分时数组[12567,34567,34567...]，调用时机应确保当前歌词已经获取到并嫁接到song实体
+  private resolveLrc(){
+    this.lrcTimes = this.song.lrc.map(lrc => {
+      return this.util.translateLrcTime(lrc.trim().split(']')[0].trim());
+    })
+  }
+
+  public registerLrcUptateListener(listener : any){
+    this.lrcUptateListener = listener;
+  }
+
+  public getCurLrcIndex(){
+    return this.curLrcIndex;
+  }
+
+  private checkoutLrc(){
+    for(let i = 0, len = this.lrcTimes.length; i < len; i++){
+      if(i < len - 1 && this.audio.currentTime * 1000 >= this.lrcTimes[i] && this.audio.currentTime * 1000 < this.lrcTimes[i+1]){
+        this.curLrcIndex != i && this.lrcUptateListener && this.lrcUptateListener();
+        this.curLrcIndex = i;
+        break;
+      }else if(i == len -1 && this.audio.currentTime * 1000 >= this.lrcTimes[i]){
+        this.curLrcIndex != i && this.lrcUptateListener && this.lrcUptateListener();
+        this.curLrcIndex = i;
+      }
+    }
+  }
 }

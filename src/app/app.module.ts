@@ -14,6 +14,8 @@ import {PreviewPage} from "../pages/preview/preview";
 import {ShowTimePipe} from "../pipes/show-time";
 import {DragItDirective} from "../directives/drag-it.directive";
 import {SettingPage} from "../pages/setting/setting";
+import {ToTimePipe} from "../pipes/to-time";
+import {ScrollDirective} from "../directives/scroll.directive";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {SettingPage} from "../pages/setting/setting";
     SettingPage,
     BackDirective,
     DragItDirective,
-    ShowTimePipe
+    ScrollDirective,
+    ShowTimePipe,
+    ToTimePipe
   ],
   imports: [
     IonicModule.forRoot(MyApp)

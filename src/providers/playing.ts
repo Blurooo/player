@@ -5,21 +5,9 @@ import {Observable} from "rxjs";
 import {Song} from "../entity/song";
 import {Apis} from "../common/Apis";
 
-/*
-  Generated class for the Playing provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class Playing {
 
-  type : any = {
-    song : '1',         //单曲
-    album : '100',      //专辑
-    artist : '1000',    //歌手
-    user : '1002'       //用户
-  }
 
 
   constructor(public http: Http, public apis : Apis) {
@@ -28,7 +16,7 @@ export class Playing {
 
 
   public searchSongsByKey(key : string, type ?: string, offset ?: number) : Observable<Song[]>{
-    return this.http.post(`${this.apis.searchSongsByKey}?s=${key}&type=${type || this.type.song}&limit=10&offset=${offset || 0}`, null)
+    return this.http.post(`${this.apis.searchSongsByKey}?s=${key}&type=${type || 1}&limit=10&offset=${offset || 0}`, null)
       .map(this.extraData)
       .map((res : any) => res.result.songs);
   }
@@ -41,6 +29,12 @@ export class Playing {
 
   public getSongCrackById(id : number){
     return this.apis.crackSongsById.replace('%s', id + '');
+  }
+
+  public getLrcById(id : number) : Observable<string>{
+    return this.http.get(this.apis.getLrcById.replace('%s', id + ''))
+      .map(this.extraData)
+      .map((res : any) => {return res.lrc && res.lrc.lyric});
   }
 
   extraData(res : Response){

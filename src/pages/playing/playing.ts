@@ -1,24 +1,21 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {Content, NavController, NavParams} from 'ionic-angular';
 import {SearchPage} from "../search/search";
 import {Util} from "../../common/util";
 import {PlayingService} from "../../services/playing";
-import {ListPage} from "../list/list";
 import {LovePage} from "../love/love";
 import {PlayMode} from "../../entity/play-mode";
 import {SettingPage} from "../setting/setting";
 
-/*
-  Generated class for the Playing page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-playing',
   templateUrl: 'playing.html'
 })
-export class PlayingPage {
+export class PlayingPage implements AfterViewInit{
+
+  @ViewChild(Content)
+  content : Content;
 
   volumeTmp : number = 0;
 
@@ -28,7 +25,17 @@ export class PlayingPage {
     direction : 'forward'
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public playingService : PlayingService, public util : Util) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public playingService : PlayingService, public util : Util) {
+
+  }
+
+  ngAfterViewInit(){
+    this.playingService.registerLrcUptateListener(this.scrollLrc);
+  }
+
+  scrollLrc = () => {
+    this.content.scrollTo(0, this.playingService.getCurLrcIndex() >= 2 ? (this.playingService.getCurLrcIndex() - 1) * 20 : 0);
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlayingPage');
@@ -85,5 +92,15 @@ export class PlayingPage {
 
   drag(e, name){
     console.log(e, name);
+  }
+
+  getTime(ls : string) : string{
+    if(!ls) return '0';
+    return ls.split(']')[0];
+  }
+
+  getLrc(ls : string) : string{
+    if(!ls) return '';
+    return ls.split(']')[1].trim();
   }
 }
