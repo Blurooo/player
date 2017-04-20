@@ -16,8 +16,8 @@
       </div>
 
       <ion-content class="lyric-scroll">
-        <p *ngFor="let l of playingService.getPlayingSong().lrc; let index = index;" [attr.time]="getTime(l) | toTime" class="{{playingService.getCurLrcIndex() === index ? 'cur' : ''}}">{{getLrc(l) || '&nbsp;'}}</p>
-        <div *ngIf="!playingService.getPlayingSong().lrc || playingService.getPlayingSong().lrc.length === 0">
+        <p *ngFor="let l of playingService.getPlayingSong()?.lrc; let index = index;" [attr.time]="getTime(l) | toTime" class="{{playingService.getCurLrcIndex() === index ? 'cur' : ''}}">{{getLrc(l) || '&nbsp;'}}</p>
+        <div *ngIf="!playingService.getPlayingSong()?.lrc || playingService.getPlayingSong()?.lrc.length === 0">
           <p>&nbsp;</p>
           <p>&nbsp;</p>
           <p>暂无歌词</p>

@@ -37,7 +37,7 @@ export class Playing {
       .map((res : any) => {return res.lrc && res.lrc.lyric});
   }
 
-  extraData(res : Response){
+  private extraData(res : Response){
     return res.json();
   }
 

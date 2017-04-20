@@ -50,7 +50,7 @@ export class DragItDirective{
 
   constructor(renderer : Renderer, el : ElementRef, navCtl : NavController){
     let flat = false;
-    renderer.setElementAttribute(el.nativeElement, 'draggable', 'true');
+    //renderer.setElementAttribute(el.nativeElement, 'draggable', 'true');
     renderer.listen(el.nativeElement, 'touchstart', e => {
       e.preventDefault();
       flat = true;

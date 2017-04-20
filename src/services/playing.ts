@@ -185,7 +185,7 @@ export class PlayingService {
         this.playInfo.song = song;
         if(song.fee > 0){
           if(!this.setting.autoCrack){
-            this.util.confirm(`该歌曲需要付费${song.fee}元，是否启动自动破解？`).subscribe(res => {
+            this.util.confirm(`该歌曲需要付费${song.fee}元，是否启动自动换源？`).subscribe(res => {
               !res && resume && this.resume(volume);
               if(res){
                 this.setAutoCrack(true);
@@ -305,7 +305,6 @@ export class PlayingService {
     }
     this.audio.onended = () => {
       this.next();
-      this.lrcTimes = [];
     }
     if(playInfo){
       this.audio.volume = this.playInfo.volume;
@@ -325,6 +324,7 @@ export class PlayingService {
         return /^\d+/.test(l) && l.split(']')[1].trim();
       });
       this.resolveLrc();
+      this.checkoutLrc(true);
     })
   }
 
@@ -344,6 +344,7 @@ export class PlayingService {
   public resume(volume ?: number){
     this.audio.play();
     this.fadeIn(volume || this.audio.volume).subscribe();
+    this.checkoutLrc();
   }
 
   //改变播放状态，播放时暂停，暂停或停止状态时播放
@@ -358,7 +359,7 @@ export class PlayingService {
 
   //通过关键字查找资源，资源可以是歌曲、歌手等，只返回一个携带至多10条记录的可观察对象。关键字为空时直接返回一个携带空数组的可观察对象
   public searchSongsByKey(key : string, type ?: string) : Observable<Song[]>{
-    this.key = key.trim();
+    this.key = key;
     this.offset = 0;
     if(type) this.curType = type;
     if(!this.key) return Observable.create((observer : Observer<Song[]>) => {
@@ -427,15 +428,25 @@ export class PlayingService {
     return this.curLrcIndex;
   }
 
-  private checkoutLrc(){
+  private checkoutLrc(isInit ?: boolean){
+    if(isInit){
+      this.curLrcIndex = 0;
+      this.lrcUptateListener && this.lrcUptateListener();
+      return;
+    }
     for(let i = 0, len = this.lrcTimes.length; i < len; i++){
       if(i < len - 1 && this.audio.currentTime * 1000 >= this.lrcTimes[i] && this.audio.currentTime * 1000 < this.lrcTimes[i+1]){
-        this.curLrcIndex != i && this.lrcUptateListener && this.lrcUptateListener();
         this.curLrcIndex = i;
+        this.lrcUptateListener && this.lrcUptateListener();
         break;
       }else if(i == len -1 && this.audio.currentTime * 1000 >= this.lrcTimes[i]){
-        this.curLrcIndex != i && this.lrcUptateListener && this.lrcUptateListener();
         this.curLrcIndex = i;
+        this.lrcUptateListener && this.lrcUptateListener();
+        break;
+      }else if(this.audio.currentTime * 1000 <= this.lrcTimes[0]){
+        this.curLrcIndex = 0;
+        this.lrcUptateListener && this.lrcUptateListener();
+        break;
       }
     }
   }

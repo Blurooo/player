@@ -37,7 +37,7 @@
       <ion-toggle [checked]="playingService.getSetting()?.autoResume" (ionChange)="playingService.setAutoResume($event._checked)"></ion-toggle>
     </ion-item>
     <ion-item>
-      <ion-label>自动破解收费歌曲</ion-label>
+      <ion-label>收费歌曲自动换源</ion-label>
       <ion-toggle [checked]="playingService.getSetting()?.autoCrack" (ionChange)="playingService.setAutoCrack($event._checked)"></ion-toggle>
     </ion-item>
   </ion-list>

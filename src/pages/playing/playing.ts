@@ -36,7 +36,6 @@ export class PlayingPage implements AfterViewInit{
   scrollLrc = () => {
     this.content.scrollTo(0, this.playingService.getCurLrcIndex() >= 2 ? (this.playingService.getCurLrcIndex() - 1) * 20 : 0);
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlayingPage');
   }
