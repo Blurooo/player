@@ -12,6 +12,6 @@
   <ion-content class="reviese-content">
     <page-list [playList]="playingService.getPlayList()"></page-list>
   </ion-content>
-
+  <page-preview *ngIf="playingService.getPlayingSong()" [song]="playingService.getPlayingSong()"></page-preview>
 
 </div>
